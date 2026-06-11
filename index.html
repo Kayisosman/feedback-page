@@ -253,7 +253,7 @@
     const params = new URLSearchParams(window.location.search);
 
     const businessId = params.get("business_id") || "";
-    const businessName = params.get("business_name") || "deinen Besuch";
+    const businessName = params.get("business_name") || "";
     const customerId = params.get("customer_id") || "";
     const appointmentId = params.get("appointment_id") || "";
     const googleReviewUrl = params.get("google_review_url") || "";
@@ -271,8 +271,8 @@
 
     let selectedRating = 0;
 
-    headline.textContent = "Vielen Dank für deinen Besuch bei " + businessName + "!";
-    subtitle.textContent = "Deine Meinung hilft " + businessName + ", den Service weiter zu verbessern.";
+    headline.textContent = businessName ? "Vielen Dank für deinen Besuch bei " + businessName + "!" : "Vielen Dank für deinen Besuch!";
+    subtitle.textContent = businessName ? "Deine Meinung hilft " + businessName + ", den Service weiter zu verbessern." : "Deine Meinung hilft uns, den Service weiter zu verbessern.";
 
     if (businessName && businessName !== "deinen Besuch") {
       logoText.textContent = businessName.trim().charAt(0).toUpperCase();
