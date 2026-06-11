@@ -310,7 +310,7 @@
         created_at: new Date().toISOString()
       };
 
-      if (MAKE_WEBHOOK_URL !== "DEINE_MAKE_WEBHOOK_URL_HIER") {
+      if (MAKE_WEBHOOK_URL ) {
         try {
           await fetch(MAKE_WEBHOOK_URL, {
             method: "POST",
