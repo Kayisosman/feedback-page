@@ -1,137 +1,346 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback</title>
 
-<title>Feedback</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", sans-serif;
+    }
 
-<style>
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.16), transparent 34%),
+        linear-gradient(135deg, #0f1115 0%, #1f2933 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #111827;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
+    }
 
-body{
-background:#f5f7fa;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-padding:20px;
-}
+    .brand {
+      text-align: center;
+      margin-bottom: 26px;
+    }
 
-.card{
-background:white;
-width:100%;
-max-width:600px;
-padding:40px;
-border-radius:24px;
-box-shadow:0 15px 40px rgba(0,0,0,0.08);
-}
+    .logo {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 16px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #111827, #374151);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
 
-.logo{
-width:90px;
-height:90px;
-border-radius:50%;
-background:#e9eef5;
-margin:auto;
-margin-bottom:20px;
-}
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      color: #a67c00;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
 
-h1{
-text-align:center;
-font-size:32px;
-margin-bottom:10px;
-color:#111827;
-}
+    h1 {
+      font-size: 30px;
+      line-height: 1.15;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 12px;
+    }
 
-.subtitle{
-text-align:center;
-color:#6b7280;
-margin-bottom:35px;
-}
+    .subtitle {
+      color: #6b7280;
+      font-size: 16px;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
 
-.stars{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-bottom:30px;
-}
+    .rating-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
 
-.star{
-font-size:42px;
-cursor:pointer;
-color:#d1d5db;
-transition:0.2s;
-}
+    .question {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
 
-.star:hover{
-transform:scale(1.1);
-}
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
 
-textarea{
-width:100%;
-height:140px;
-padding:15px;
-border:1px solid #d1d5db;
-border-radius:14px;
-resize:none;
-font-size:16px;
-margin-bottom:20px;
-}
+    .star {
+      font-size: 44px;
+      color: #d1d5db;
+      cursor: pointer;
+      transition: 0.18s ease;
+      user-select: none;
+    }
 
-button{
-width:100%;
-padding:16px;
-border:none;
-border-radius:14px;
-background:#111827;
-color:white;
-font-size:16px;
-font-weight:600;
-cursor:pointer;
-}
+    .star.active {
+      color: #d4af37;
+      transform: translateY(-2px);
+    }
 
-button:hover{
-opacity:0.9;
-}
+    .hint {
+      text-align: center;
+      font-size: 14px;
+      color: #6b7280;
+      min-height: 22px;
+    }
 
-</style>
+    .feedback-area {
+      display: none;
+      margin-top: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 132px;
+      resize: vertical;
+      border: 1px solid #d1d5db;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 15px;
+      line-height: 1.5;
+      outline: none;
+      margin-top: 12px;
+    }
+
+    textarea:focus {
+      border-color: #d4af37;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 16px 18px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      background: #111827;
+      color: #ffffff;
+      transition: 0.18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: #020617;
+    }
+
+    .secondary-text {
+      text-align: center;
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 18px 0 4px;
+    }
+
+    .success h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .success p {
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 26px 20px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .star {
+        font-size: 38px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <main class="card">
+    <section id="mainContent">
+      <div class="brand">
+        <div class="logo" id="logoText">★</div>
+        <div class="eyebrow">Feedback</div>
+        <h1 id="headline">Vielen Dank für deinen Besuch!</h1>
+        <p class="subtitle" id="subtitle">
+          Deine Meinung hilft uns, unseren Service jeden Tag besser zu machen.
+        </p>
+      </div>
 
-<div class="card">
+      <div class="rating-box">
+        <div class="question">Wie zufrieden warst du mit deinem Besuch?</div>
 
-<div class="logo"></div>
+        <div class="stars" id="stars">
+          <span class="star" data-rating="1">★</span>
+          <span class="star" data-rating="2">★</span>
+          <span class="star" data-rating="3">★</span>
+          <span class="star" data-rating="4">★</span>
+          <span class="star" data-rating="5">★</span>
+        </div>
 
-<h1 id="businessName">Vielen Dank!</h1>
+        <div class="hint" id="hint">Wähle eine Bewertung aus.</div>
 
-<p class="subtitle">
-Deine Meinung hilft uns, unseren Service zu verbessern.
-</p>
+        <div class="feedback-area" id="feedbackArea">
+          <textarea id="comment" placeholder="Was können wir beim nächsten Mal besser machen?"></textarea>
+        </div>
+      </div>
 
-<div class="stars">
+      <button id="submitButton">Bewertung absenden</button>
 
-<span class="star">★</span>
-<span class="star">★</span>
-<span class="star">★</span>
-<span class="star">★</span>
-<span class="star">★</span>
+      <p class="secondary-text">
+        Deine Rückmeldung wird vertraulich behandelt und hilft dem Betrieb, den Service zu verbessern.
+      </p>
+    </section>
 
-</div>
+    <section class="success" id="successBox">
+      <h2>Vielen Dank.</h2>
+      <p>Dein Feedback wurde gespeichert.</p>
+    </section>
+  </main>
 
-<textarea placeholder="Optionales Feedback"></textarea>
+  <script>
+    const MAKE_WEBHOOK_URL = "DEINE_MAKE_WEBHOOK_URL_HIER";
 
-<button>Bewertung absenden</button>
+    const params = new URLSearchParams(window.location.search);
 
-</div>
+    const businessId = params.get("business_id") || "";
+    const businessName = params.get("business_name") || "deinen Besuch";
+    const customerId = params.get("customer_id") || "";
+    const appointmentId = params.get("appointment_id") || "";
+    const googleReviewUrl = params.get("google_review_url") || "";
 
+    const headline = document.getElementById("headline");
+    const subtitle = document.getElementById("subtitle");
+    const logoText = document.getElementById("logoText");
+    const stars = document.querySelectorAll(".star");
+    const hint = document.getElementById("hint");
+    const feedbackArea = document.getElementById("feedbackArea");
+    const comment = document.getElementById("comment");
+    const submitButton = document.getElementById("submitButton");
+    const mainContent = document.getElementById("mainContent");
+    const successBox = document.getElementById("successBox");
+
+    let selectedRating = 0;
+
+    headline.textContent = "Vielen Dank für deinen Besuch bei " + businessName + "!";
+    subtitle.textContent = "Deine Meinung hilft " + businessName + ", den Service weiter zu verbessern.";
+
+    if (businessName && businessName !== "deinen Besuch") {
+      logoText.textContent = businessName.trim().charAt(0).toUpperCase();
+    }
+
+    stars.forEach(star => {
+      star.addEventListener("click", () => {
+        selectedRating = Number(star.dataset.rating);
+
+        stars.forEach(s => {
+          s.classList.toggle("active", Number(s.dataset.rating) <= selectedRating);
+        });
+
+        if (selectedRating >= 4) {
+          feedbackArea.style.display = "none";
+          hint.textContent = "Danke. Deine Bewertung hilft dem Betrieb sehr.";
+          submitButton.textContent = "Weiter zur Google Bewertung";
+        } else {
+          feedbackArea.style.display = "block";
+          hint.textContent = "Danke für deine ehrliche Rückmeldung.";
+          submitButton.textContent = "Feedback senden";
+        }
+      });
+    });
+
+    async function sendFeedback() {
+      const payload = {
+        business_id: businessId,
+        business_name: businessName,
+        customer_id: customerId,
+        appointment_id: appointmentId,
+        rating: selectedRating,
+        comment: comment.value || "",
+        google_review_url: googleReviewUrl,
+        created_at: new Date().toISOString()
+      };
+
+      if (MAKE_WEBHOOK_URL !== "DEINE_MAKE_WEBHOOK_URL_HIER") {
+        try {
+          await fetch(MAKE_WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (error) {
+          console.log("Webhook error:", error);
+        }
+      }
+    }
+
+    submitButton.addEventListener("click", async () => {
+      if (!selectedRating) {
+        hint.textContent = "Bitte wähle zuerst eine Bewertung aus.";
+        return;
+      }
+
+      await sendFeedback();
+
+      if (selectedRating >= 4 && googleReviewUrl) {
+        window.location.href = googleReviewUrl;
+        return;
+      }
+
+      mainContent.style.display = "none";
+      successBox.style.display = "block";
+    });
+  </script>
 </body>
 </html>
